@@ -1,21 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import PageOne from '../views/PageOne.vue'
-import PageTwo from '../views/PageTwo.vue'
-import BaseLayout from '@/views/BaseLayout.vue'
+import { experimental_createRouter } from 'vue-router/experimental'
+import { resolver } from "vue-router/auto-resolver";
+import { createWebHistory } from 'vue-router'
 
-const router = createRouter({
+const router = experimental_createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: BaseLayout,
-            children: [
-                { name: "page-one", path: "page-one", children: [{ path: ":id?", name: "page-one/:id?", component: PageOne }] },
-                { name: "page-two", path: "page-two", children: [{ path: ":id?", name: "page-two/:id?", component: PageTwo }] },
-            ]
-        },
-    ],
+    resolver,
 })
 
 export default router
